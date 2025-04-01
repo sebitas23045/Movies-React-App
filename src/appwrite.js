@@ -28,7 +28,7 @@ export const updateSearchCount= async (searchTerm, movie) => {
          await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(),
             {
                 searchTerm,
-                COUNT: 1,
+                count: 1,
                 movie_id: movie.id,
                 poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
             }
@@ -43,7 +43,7 @@ export const getTrendingMovies = async () => {
     try {
         const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
             Query.limit(5),
-            Query.orderDesc("COUNT")
+            Query.orderDesc("count")
         ])
 
         return result.documents;
